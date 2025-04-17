@@ -23,3 +23,11 @@ def get_count_action() -> CountDetectedObjects:
     env = os.environ.get('ENV', 'dev')
     count_action_fn = f"{env}_count_action"
     return globals()[count_action_fn]()
+
+def get_object_detector() -> CountDetectedObjects:
+    env = os.environ.get('ENV', 'dev')
+    count_action_fn = f"{env}_count_action"
+    count_action = globals()[count_action_fn]()  # This gets the appropriate count action object
+    
+    # Instead of returning 'count_objects', return the 'execute' method of the action
+    return count_action.execute
